@@ -1,4 +1,9 @@
-### Fetch all posts
-
 @baseUrl=http://localhost:3000
+
+### Fetch all posts
 GET {{baseUrl}}/posts?search=a
+
+### one post
+GET {{baseUrl}}/posts/1
+
+

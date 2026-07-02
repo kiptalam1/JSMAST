@@ -1,6 +1,6 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { Controller, Get, Param, ParseIntPipe, Query } from '@nestjs/common';
 import { PostsService } from './posts.service';
-import { Post } from './interfaces/post.interface';
+import type { Post } from './interfaces/post.interface';
 
 @Controller('posts')
 export class PostsController {
@@ -16,5 +16,11 @@ export class PostsController {
       );
     }
     return extracts;
+  }
+
+  // single post;
+  @Get(':id')
+  findOne(@Param('id', ParseIntPipe) id: number): Post {
+    return this.postsService.findOne(id);
   }
 }
