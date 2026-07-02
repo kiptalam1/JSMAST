@@ -3,7 +3,6 @@ import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
-import { PostsModule } from './posts/posts.module';
 
 @Module({
   imports: [
@@ -11,7 +10,6 @@ import { PostsModule } from './posts/posts.module';
     ConfigModule.forRoot({
       isGlobal: true,
     }),
-    PostsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
