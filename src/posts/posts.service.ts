@@ -59,4 +59,17 @@ export class PostsService {
 
     return this.posts[postIndex];
   }
+
+  // delete post;
+  remove(id: number) {
+    const postIndex = this.posts.findIndex((post) => post.id === id);
+    if (postIndex === -1) {
+      throw new NotFoundException(`Post with ID ${id} is not found`);
+    }
+
+    this.posts.splice(postIndex, 1);
+    return {
+      message: 'success',
+    };
+  }
 }

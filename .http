@@ -24,3 +24,6 @@ Content-Type: application/json
     "title": "first edited",
     "content": "edited"
 }
+
+### Delete post;
+DELETE {{baseUrl}}/posts/1

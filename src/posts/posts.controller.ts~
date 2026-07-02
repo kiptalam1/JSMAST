@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpCode,
   HttpStatus,
@@ -51,5 +52,12 @@ export class PostsController {
     @Body() updatePostData: Partial<Omit<PostInterface, 'id' | 'createdAt'>>,
   ): PostInterface {
     return this.postsService.update(id, updatePostData);
+  }
+
+  // delete post;
+  @Delete(':id')
+  @HttpCode(HttpStatus.NO_CONTENT)
+  remove(@Param('id', ParseIntPipe) id: number) {
+    return this.postsService.remove(id);
   }
 }

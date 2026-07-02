@@ -1,7 +1,7 @@
 @baseUrl=http://localhost:3000
 
 ### Fetch all posts
-GET {{baseUrl}}/posts?
+GET {{baseUrl}}/posts
 
 ### one post
 GET {{baseUrl}}/posts/1
@@ -24,3 +24,6 @@ Content-Type: application/json
     "title": "first edited",
     "content": "edited"
 }
+
+### Delete post;
+D
