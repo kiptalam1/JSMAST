@@ -41,4 +41,22 @@ export class PostsService {
       ? Math.max(...this.posts.map((post) => post.id)) + 1
       : 1;
   }
+  // update post;
+  update(
+    id: number,
+    updatePostData: Partial<Omit<Post, 'id' | 'createdAt'>>,
+  ): Post {
+    const postIndex = this.posts.findIndex((post) => post.id === id);
+    if (postIndex === -1) {
+      throw new NotFoundException(`Post with ID ${id} is not found`);
+    }
+
+    this.posts[postIndex] = {
+      ...this.posts[postIndex],
+      ...updatePostData,
+      updatedAt: new Date(),
+    };
+
+    return this.posts[postIndex];
+  }
 }
