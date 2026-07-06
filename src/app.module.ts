@@ -6,6 +6,8 @@ import { UserModule } from './user/user.module';
 import { PostsModule } from './posts/posts.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Post } from './posts/entities/post.entity'
+import { AuthModule } from './auth/auth.module';
+import { User } from './auth/entities/user.entity';
 
 @Module({
   imports: [
@@ -20,11 +22,12 @@ import { Post } from './posts/entities/post.entity'
       ssl: {
         rejectUnauthorized: false,
       },
-      entities: [Post],
+      entities: [Post, User],
     }),
 
     UserModule,
     PostsModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

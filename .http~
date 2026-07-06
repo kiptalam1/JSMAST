@@ -23,8 +23,38 @@ Content-Type: application/json
 
 {
     "title": "first edited",
-    "content": "edited"
+    "content": "edited",
+    "authorName": "smada"
 }
 
 ### Delete post;
 DELETE {{baseUrl}}/posts/1
+
+### Register user
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+    "email": "adams@gmail.com",
+    "name": "Adams",
+    "password": "adams1234"
+}
+
+### Login user
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+    "email": "adams@gmail.com",
+    "password": "adams1234"
+}
+
+### Refresh token 
+POST {{baseUrl}}/auth/refresh
+Content-Type: application/json
+
+{
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImlhdCI6MTc4MzM1ODk4MywiZXhwIjoxNzgzOTYzNzgzfQ.4GpvR4CoCT_MFQvdrpQ1SyL2zdlm-tWQ5k3A1X-ZN4U"
+}
+}
+
