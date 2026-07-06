@@ -6,14 +6,15 @@ GET {{baseUrl}}/posts
 ### one post
 GET {{baseUrl}}/posts/1
 
-### create post
+### create post 
+# @kulala-jq .
 POST {{baseUrl}}/posts/create
 Content-Type: application/json
 
 {
-    "title": "second",
-     "content": "second post",
-   "authorName": "kip"
+    "title": "first post with db",
+     "content": "first db post",
+   "authorName": "adams"
 }
 
 ### update post
@@ -22,7 +23,8 @@ Content-Type: application/json
 
 {
     "title": "first edited",
-    "content": "edited"
+    "content": "edited",
+    "authorName": "smada"
 }
 
 ### Delete post;
