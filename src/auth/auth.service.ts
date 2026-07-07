@@ -1,6 +1,7 @@
 import {
   ConflictException,
   Injectable,
+  NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -10,6 +11,13 @@ import { RegisterDto } from './dto/register.dto';
 import bcrypt from 'bcrypt';
 import { LoginDto } from './dto/login.dto';
 import { JwtService } from '@nestjs/jwt';
+
+
+type Payload = {
+  email: string;
+  sub: number;
+  role: UserRole;
+};
 
 @Injectable()
 export class AuthService {
@@ -84,6 +92,7 @@ export class AuthService {
         'Account not found or invalid credentials',
       );
     }
+
     // generate jwt tokens
     const tokens = this.generateTokens(user);
     const { password, ...result } = user;
@@ -94,10 +103,21 @@ export class AuthService {
     };
   }
 
+  // find user by id.
+  async getUserById(userId: number) {
+    const user = await this.userRepository.findOne({
+      where: { id: userId },
+    });
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+    const { password, ...result } = user;
+    return result;
+  }
   // refresh jwt
   async refreshToken(refreshToken: string) {
     try {
-      const payload = this.jwtService.verify(refreshToken, {
+      const payload: Payload = this.jwtService.verify(refreshToken, {
         secret: 'refresh_secret',
       });
       const user = await this.userRepository.findOne({
@@ -107,7 +127,6 @@ export class AuthService {
       });
       if (!user) {
         throw new UnauthorizedException('Invalid token');
-
       }
       const accessToken = this.generateAccessToken(user);
       return { accessToken };
