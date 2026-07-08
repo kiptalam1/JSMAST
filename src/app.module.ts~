@@ -23,6 +23,8 @@ import { User } from './auth/entities/user.entity';
         rejectUnauthorized: false,
       },
       entities: [Post, User],
+      extra: { family: 4, },
+      retryAttempts: 0,
     }),
 
     UserModule,
@@ -33,4 +35,4 @@ import { User } from './auth/entities/user.entity';
   providers: [AppService],
 })
 export class AppModule { }
-
+console.log(process.env.DATABASE_URL);
